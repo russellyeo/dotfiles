@@ -30,6 +30,17 @@ Add your SSH private key to the ssh-agent and store your passphrase in the keych
 $ ssh-add -K ~/.ssh/id_rsa
 ```
 
+
+## Bootstrap dependencies
+
+Clone repo and run bootstrap script.
+```sh
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME' && \
+git clone --bare git@github.com:rus64/dotfiles.git $HOME/.dotfiles_bare && \
+dotfiles checkout && \
+sh ~/.dotfiles/bootstrap.sh
+```
+
 ## Other packages
 
 ### App Store

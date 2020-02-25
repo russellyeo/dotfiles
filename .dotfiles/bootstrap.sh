@@ -24,16 +24,6 @@ step "Updating software"
 sudo softwareupdate -iaR --verbose
 xcode-select --install
 
-# dotfiles
-if [ ! -d "$HOME/.dotfiles_bare" ]; then
-    installing "dotfiles"
-    alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
-    git clone --bare git@github.com:rus64/dotfiles.git $HOME/.dotfiles_bare
-    dotfiles checkout
-else
-    alreadyInstalled "dotfiles"
-fi 
-
 # oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     installing "oh-my-zsh"
