@@ -1,0 +1,48 @@
+# load other alias files
+source $HOME/.dotfiles/.aliases-ios
+
+# dotfiles git config
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
+
+# Shell configuration
+alias zshconfig="sublime ~/.zshrc"
+alias zshaliases="sublime ~/.aliases"
+alias ohmyzsh="sublime ~/.oh-my-zsh"
+alias zshreload=". ~/.zshrc"
+alias zshclearhistory='echo "" > ~/.zsh_history & exec $SHELL -l'
+
+# depop-backend environment
+alias startpython="source ./VENV/bin/activate && export DOCKER_IP=0.0.0.0 && docker-compose up -d"
+alias runpython="./run_in_env.sh .env-local-api garage/manage.py runserver"
+alias envpython="source /Users/$USER/Documents/dev/depop/depop-backend/VENV/bin/activate"
+
+# weather
+alias weather='curl wttr.in/London'
+
+# clean up system logs (they can slow down terminal)
+alias cleanlogs="sudo rm /private/var/log/asl/*.asl"
+
+# notes
+alias notes="code ~/Dropbox/notes/"
+
+# bat the cat
+alias cat="bat"
+
+# Depop internal endpoints curl requests
+
+## Get user info by username
+function user-by-username() {
+    curl -X GET "https://api-staging.depop.com/internal/v1/users/by-username/$1/"
+}
+
+## Invite user to stripe onboarding by userId
+function stripe-invite() {
+    curl -X PUT "https://stage-interim-payments-api.depop.com/internal/v1/invites/$1/"
+}
+
+# Search diff from <commit or branch> for TODOs
+function todo-since() {
+	git diff $1 --name-only | sed 's/ /\\ /g' | xargs ack -C 1 'TODO'
+}
+
+alias gs="git status && gh pr status"

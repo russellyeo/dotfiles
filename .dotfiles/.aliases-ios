@@ -1,0 +1,50 @@
+# iOS aliases
+
+## bootstrap
+alias bootstrap="sh ~/depop/depop-ios/Scripts/bootstrap_dependencies.sh && terminal-notifier -title '📲 Bootstrap Dependencies' -message 'Finished'"
+
+## run sourcery
+alias sourcerify="sourcery && cat Sourcery/Output.swift | pbcopy && rm Sourcery/Output.swift"
+
+## start mock server
+alias mockserver="sh ~/depop/depop-ios/Garage/DepopUITests/Base/mockserver/start_server.sh"
+
+## run swiftlint autocorrect on diff since <commit or branch>
+function swiftlint-since() {
+    git diff --name-only $1 | grep '^.*\.swift$' | xargs swiftlint autocorrect
+}
+
+## open deeplink
+function deeplink() {
+    xcrun simctl openurl booted depop://$1
+}
+
+## delete all ios artifacts
+function ios-nuke() {
+    rm -rf ~/Library/Developer/Xcode/DerivedData/ && \
+    rm -rf ~/Library/Caches/carthage && \
+    rm -rf ~/Library/Caches/Rome-swift* && \
+    rm -rf ~/Library/Caches/org.carthage.CarthageKit && \
+    cd $IOS && \
+    sh ./Scripts/bootstrap_dependencies.sh && \
+    open Depop.xcworkspace && \
+    terminal-notifier -title '🛠 Deep clean xcode' -message 'Finished'
+}
+
+## xctest <scheme>
+function xctest() {
+	if [ -z "$1" ]; then
+	  	SCHEME=$1
+	else 
+		SCHEME="Garage"
+	fi
+	xcodebuild \
+	  -workspace Depop.xcworkspace \
+	  -scheme ${SCHEME} \
+	  -sdk iphonesimulator \
+	  -destination 'platform=iOS Simulator,name=iPhone XS,OS=12.1' \
+	  test | \
+	  tee ~/Documents/xcodebuild-test.log | \
+	  xcpretty --simple --color && \
+	  terminal-notifier -title '🛠 xcodebuild test' -message 'Finished'
+}

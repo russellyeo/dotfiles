@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Allow all files in .dotfiles directory except .profile
+!/.dotfiles/**
+/.dotfiles/.profile
+
+# Allow specific files
+!.zshrc
+!.gitignore
+!.gitconfig
