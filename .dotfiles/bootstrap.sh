@@ -28,11 +28,21 @@ xcode-select --install
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     installing "oh-my-zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+else 
+    alreadyInstalled "oh-my-zsh" 
+fi 
+
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 else
-    alreadyInstalled "oh-my-zsh"
+    alreadyInstalled "zsh-syntax-highlighting"
 fi 
+
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+else
+    alreadyInstalled "zsh-autosuggestions"
+fi
 
 # zsh shell
 if [[ ! $(echo $SHELL) == "/bin/zsh" ]]; then 
