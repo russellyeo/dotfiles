@@ -73,6 +73,13 @@ fi
 # Update homebrew
 brew update
 
+# Tap brew repositories
+installing "brew taps"
+TAPS=(
+    "tmspzz/tap https://github.com/tmspzz/homebrew-tap.git"
+)
+brew tap ${TAPS[@]}
+
 # Install command line tools
 installing "brews"
 BREWS=(
@@ -102,6 +109,7 @@ BREWS=(
     terminal-notifier
     thefuck
     tldr
+    tmspzz/homebrew-tap/rome
     tree
 )
 brew install ${BREWS[@]}
