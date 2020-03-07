@@ -45,4 +45,8 @@ function todo-since() {
 	git diff $1 --name-only | sed 's/ /\\ /g' | xargs ack -C 1 'TODO'
 }
 
-alias gs="git status && gh pr status"
+alias jira="acli depop --action getIssueList --jql \"project = DD and assignee = 'russell' and not status = 'done' and not status = 'abandoned'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
+
+alias today="sed -n '/^## "$(date -u +%Y-%m-%d)"/,"\$p"' $LOG | cat --language markdown --paging never --style=plain | glow -"
+
+alias status="gh pr status && jira && today"
