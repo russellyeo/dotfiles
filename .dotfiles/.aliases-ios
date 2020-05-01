@@ -1,7 +1,7 @@
 # iOS aliases
 
 ## bootstrap
-alias bootstrap="sh ~/depop/depop-ios/Scripts/bootstrap_dependencies.sh && terminal-notifier -title '📲 Bootstrap Dependencies' -message 'Finished'"
+alias ios-bootstrap="sh ~/depop/depop-ios/Scripts/bootstrap_dependencies.sh && terminal-notifier -title '📲 Bootstrap Dependencies' -message 'Finished'"
 
 ## run sourcery
 alias sourcerify="sourcery && cat Sourcery/Output.swift | pbcopy && rm Sourcery/Output.swift"
@@ -21,10 +21,11 @@ function deeplink() {
 
 ## delete all ios artifacts
 function ios-nuke() {
-    rm -rf ~/Library/Developer/Xcode/DerivedData/ && \
-    rm -rf ~/Library/Caches/carthage && \
-    rm -rf ~/Library/Caches/Rome-swift* && \
-    rm -rf ~/Library/Caches/org.carthage.CarthageKit && \
+    rm -rf /Users/$USER/Library/Developer/Xcode/DerivedData/ && \
+    rm -rf /Users/$USER/Library/Caches/carthage && \
+    rm -rf /Users/$USER/Library/Caches/Rome-swift* && \
+    rm -rf /Users/$USER/Library/Caches/org.carthage.CarthageKit && \
+    rm -rf $IOS/Carthage/Build/ && \
     cd $IOS && \
     sh ./Scripts/bootstrap_dependencies.sh && \
     open Depop.xcworkspace && \
@@ -33,18 +34,20 @@ function ios-nuke() {
 
 ## xctest <scheme>
 function xctest() {
-	if [ -z "$1" ]; then
-	  	SCHEME=$1
-	else 
-		SCHEME="Garage"
-	fi
+	# if [ -z "$1" ]; then
+	#   	SCHEME=$1
+	# else 
+	# 	SCHEME="Garage"
+	# fi
 	xcodebuild \
 	  -workspace Depop.xcworkspace \
-	  -scheme ${SCHEME} \
+	  -scheme AppUI \
+	  -only-testing 'AppUITests/EducationCarouselPresenterTests' \
+	  -enableCodeCoverage YES \
 	  -sdk iphonesimulator \
-	  -destination 'platform=iOS Simulator,name=iPhone XS,OS=12.1' \
+	  -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.3' \
 	  test | \
-	  tee ~/Documents/xcodebuild-test.log | \
+	  tee ~/Documents/xcodebuild_test.log | \
 	  xcpretty --simple --color && \
 	  terminal-notifier -title '🛠 xcodebuild test' -message 'Finished'
 }

@@ -4,6 +4,9 @@ source $HOME/.dotfiles/.aliases-ios
 # dotfiles git config
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
 
+# Run bootstrap script
+alias bootstrap="sh ~/.dotfiles/bootstrap.sh"
+
 # Shell configuration
 alias zshconfig="sublime ~/.zshrc"
 alias zshaliases="sublime ~/.aliases"
@@ -11,13 +14,8 @@ alias ohmyzsh="sublime ~/.oh-my-zsh"
 alias zshreload=". ~/.zshrc"
 alias zshclearhistory='echo "" > ~/.zsh_history & exec $SHELL -l'
 
-# depop-backend environment
-alias startpython="source ./VENV/bin/activate && export DOCKER_IP=0.0.0.0 && docker-compose up -d"
-alias runpython="./run_in_env.sh .env-local-api garage/manage.py runserver"
-alias envpython="source /Users/$USER/Documents/dev/depop/depop-backend/VENV/bin/activate"
-
 # weather
-alias weather='curl wttr.in/London'
+alias weather='curl wttr.in'
 
 # clean up system logs (they can slow down terminal)
 alias cleanlogs="sudo rm /private/var/log/asl/*.asl"
@@ -37,7 +35,12 @@ function user-by-username() {
 
 ## Invite user to stripe onboarding by userId
 function stripe-invite() {
-    curl -X PUT "https://stage-interim-payments-api.depop.com/internal/v1/invites/$1/"
+    curl -X PUT "https://payments-default-payments-api.stage-app.dpop.co.uk/internal/v1/invites/$1/"
+}
+
+## GET stripe user by userId
+function get-stripe-user() {
+	curl -X GET "https://payments-default-payments-api.stage-app.dpop.co.uk/internal/v1/users/$1/"
 }
 
 # Search diff from <commit or branch> for TODOs
@@ -45,8 +48,28 @@ function todo-since() {
 	git diff $1 --name-only | sed 's/ /\\ /g' | xargs ack -C 1 'TODO'
 }
 
-alias jira="acli depop --action getIssueList --jql \"project = DD and assignee = 'russell' and not status = 'done' and not status = 'abandoned'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
+# My open issues in current sprint
+alias jira="acli depop --action getIssueList --jql \"project = DD AND sprint = '$SPRINT' AND applications = 'iOS' OR assignee = 'russell' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
 
+# My recently closed issues
+alias jira-done="acli depop --action getIssueList --jql \"project = DD AND status = 'done' AND applications = 'iOS' OR assignee = 'russell'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
+
+# See today in log.md
 alias today="sed -n '/^## "$(date -u +%Y-%m-%d)"/,"\$p"' $LOG | cat --language markdown --paging never --style=plain | glow -"
 
+# See current status of prs, tickets and log
 alias status="gh pr status && jira && today"
+
+# Assume depop developer aws role
+#alias assume-depop="depop assume-aws-role --account-name parent --role developer --export"
+
+# Sublime
+alias sublime="subl"
+
+# Git fixup staged changes
+alias fixup="git commit --fixup=HEAD && git rebase --interactive --autosquash HEAD~2"
+
+# cheat man pages
+function cheat() {
+	curl cheat.sh/$1
+}

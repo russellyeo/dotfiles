@@ -70,13 +70,23 @@ else
     alreadyInstalled "homebrew"
 fi
 
+# sbt via sdkman
+if test ! $(which sbt); then
+    installing "homebrew"
+    curl -s "https://get.sdkman.io" | sdk i sbt
+else
+    alreadyInstalled "sbt"
+fi
+
 # Update homebrew
 brew update
 
 # Tap brew repositories
 installing "brew taps"
 TAPS=(
-    "tmspzz/tap https://github.com/tmspzz/homebrew-tap.git"
+	AdoptOpenJDK/openjdk
+    tmspzz/tap https://github.com/tmspzz/homebrew-tap.git
+    depop/tools
 )
 brew tap ${TAPS[@]}
 
@@ -86,16 +96,21 @@ BREWS=(
 	ack
 	awscli
     bat
+    coreutils
     carthage
     chisel
     crowdin
+    depop/tools/depop-cli
+    depop/tools/dpdb
     diff-so-fancy
     fd
     gh
+    git-lfs
     go
     hub
     htop
     jq
+    lastpass-cli
     ncdu
     neofetch
     nvm
@@ -111,18 +126,19 @@ BREWS=(
     tldr
     tmspzz/homebrew-tap/rome
     tree
+    vault
+    z
 )
 brew install ${BREWS[@]}
-brew cleanup
 
 # Install graphical applications
 installing "cask apps"
 CASKS=(
+    adoptopenjdk8
     alfred
     calibre
     charles
     dropbox
-    fastlane
     gpg-suite
     iterm2
     macpass
@@ -131,12 +147,14 @@ CASKS=(
     sublime-text
     sublime-merge
     visual-studio-code
+    zeplin
 )
 brew cask install ${CASKS[@]}
+brew cleanup
 
 step "Creating folder structure"
+[[ ! -d ~/.profile ]] && touch ~/.profile
 [[ ! -d ~/code ]] && mkdir ~/code
 [[ ! -d ~/depop ]] && mkdir ~/depop
 
 step "Bootstrapping complete"
-

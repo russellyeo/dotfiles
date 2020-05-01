@@ -47,7 +47,6 @@ sh ~/.dotfiles/bootstrap.sh
 * [Xcode](https://apps.apple.com/gb/app/xcode/id497799835?mt=12)
 * [Magnet](https://apps.apple.com/gb/app/magnet/id441258766?mt=12)
 * [NordVPN](https://apps.apple.com/gb/app/nordvpn-ike-unlimited-vpn/id1116599239?mt=12)
-* [JIRA](https://apps.apple.com/gb/app/jira-cloud-by-atlassian/id1475897096?mt=12)
 
 ### Sublime
 * [Dotfiles Syntax Highlighting](https://packagecontrol.io/packages/Dotfiles%20Syntax%20Highlighting)
@@ -56,12 +55,11 @@ sh ~/.dotfiles/bootstrap.sh
 ### VS Code
 * [API Elements Extension](https://marketplace.visualstudio.com/items?itemName=vncz.vscode-apielements)
 * [Scala Metals](https://marketplace.visualstudio.com/items?itemName=scalameta.metals)
-* [Scala syntax](https://marketplace.visualstudio.com/items?itemName=scala-lang.scala)
 
 ## Resources
-* [Apple Software downloads](https://developer.apple.com/download/release/)
 * [ssh key](https://help.github.com/en/articles/working-with-ssh-key-passphrases)
 * [dotfiles](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/)
 * [brew](https://brew.sh)
 * [zsh-users](https://github.com/zsh-users)
+* [Apple software downloads](https://developer.apple.com/download/release/)
 

@@ -34,11 +34,12 @@ export NVM_DIR="$HOME/.nvm"
 # java
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-# fastlane
-export PATH="$HOME/.fastlane/bin:$PATH"
+# ruby
+export PATH="$HOME/.rvm/gems/ruby-2.7.0/gems/fastlane-2.142.0/bin/fastlane:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-export PATH="/usr/local/sbin:$PATH"
 
+# SDKMAN (this has to be the last thing in the file)
+export SDKMAN_DIR="/Users/russell/.sdkman"
+[[ -s "/Users/russell/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/russell/.sdkman/bin/sdkman-init.sh"
