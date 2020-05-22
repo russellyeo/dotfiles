@@ -48,8 +48,8 @@ function todo-since() {
 	git diff $1 --name-only | sed 's/ /\\ /g' | xargs ack -C 1 'TODO'
 }
 
-# My open issues in current sprint
-alias jira="acli depop --action getIssueList --jql \"project = DD AND sprint = '$SPRINT' AND applications = 'iOS' OR assignee = 'russell' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
+# Open iOS issues in current sprint
+alias jira="acli depop --action getIssueList --jql \"project = DD AND team = 'Payments' AND sprint in openSprints() AND applications = 'iOS' AND NOT type = 'Design' AND NOT type = 'Epic' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
 
 # My recently closed issues
 alias jira-done="acli depop --action getIssueList --jql \"project = DD AND status = 'done' AND applications = 'iOS' OR assignee = 'russell'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
