@@ -73,3 +73,22 @@ alias fixup="git commit --fixup=HEAD && git rebase --interactive --autosquash HE
 function cheat() {
 	curl cheat.sh/$1
 }
+
+# convert webpage to markdown
+function fuckyeahmarkdown() {
+	curl -X GET http://fuckyeahmarkdown.com/go/\?read=1\&md=1\&u=$1 | cat --language markdown
+}
+
+# convert webpage to epub
+function url-to-epub() {
+	curl -X GET http://fuckyeahmarkdown.com/go/\?read=1\&md=1\&u=$1 -o output.md
+	pandoc output.md -o output.epub
+	rm output.md
+	echo "output.epub created"
+}
+
+# convert recipe to markdown
+get-recipe() { 
+	curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc -f html -t markdown
+}
+
