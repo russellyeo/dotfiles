@@ -1,7 +1,7 @@
 # load other alias files
 source $HOME/.dotfiles/.aliases-ios
 
-# dotfiles git config
+# dotfiles git
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
 
 # Run bootstrap script
@@ -39,7 +39,7 @@ function stripe-invite() {
 }
 
 ## GET stripe user by userId
-function get-stripe-user() {
+function stripe-settings() {
 	curl -X GET "https://payments-default-payments-api.stage-app.dpop.co.uk/internal/v1/users/$1/"
 }
 
@@ -48,8 +48,11 @@ function todo-since() {
 	git diff $1 --name-only | sed 's/ /\\ /g' | xargs ack -C 1 'TODO'
 }
 
-# My open issues in current sprint
-alias jira="acli depop --action getIssueList --jql \"project = DD AND sprint = '$SPRINT' AND applications = 'iOS' OR assignee = 'russell' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
+# my issues in current sprint
+alias jira="acli depop --action getIssueList --jql \"project = DD AND assignee = 'russell' AND sprint in openSprints() AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Story Points\" --outputType table"
+
+# iOS issues in current sprint
+alias jira-ios="acli depop --action getIssueList --jql \"project = DD AND team = 'Payments' AND sprint in openSprints() AND applications = 'iOS' AND NOT type = 'Design' AND NOT type = 'Epic' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
 
 # My recently closed issues
 alias jira-done="acli depop --action getIssueList --jql \"project = DD AND status = 'done' AND applications = 'iOS' OR assignee = 'russell'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
@@ -92,3 +95,5 @@ get-recipe() {
 	curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc -f html -t markdown
 }
 
+# Open ticket for current branch
+alias ticket="git branch --show-current | grep -Eo '\d+' | xargs -I {} open 'https://depopmarket.atlassian.net/browse/DD-{}'"

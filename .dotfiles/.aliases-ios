@@ -4,10 +4,13 @@
 alias ios-bootstrap="sh ~/depop/depop-ios/Scripts/bootstrap_dependencies.sh && terminal-notifier -title '📲 Bootstrap Dependencies' -message 'Finished'"
 
 ## run sourcery
-alias sourcerify="sourcery && cat Sourcery/Output.swift | pbcopy && rm Sourcery/Output.swift"
+alias sourcerify="sourcery --templates ~/Documents/Sourcery && cat Sourcery/Output.swift | pbcopy && rm Sourcery/Output.swift"
 
 ## start mock server
 alias mockserver="sh ~/depop/depop-ios/Garage/DepopUITests/Base/mockserver/start_server.sh"
+
+## open current design
+alias design="open '$DESIGN'"
 
 ## run swiftlint autocorrect on diff since <commit or branch>
 function swiftlint-since() {
