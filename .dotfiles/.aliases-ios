@@ -14,7 +14,7 @@ alias design="open '$DESIGN'"
 
 ## run swiftlint autocorrect on diff since <commit or branch>
 function swiftlint-since() {
-    git diff --name-only $1 | grep '^.*\.swift$' | xargs swiftlint autocorrect
+    git diff --diff-filter=d --name-only $1 | grep '.swift$' | xargs swiftlint autocorrect
 }
 
 ## open deeplink
