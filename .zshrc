@@ -40,6 +40,5 @@ export PATH="$HOME/.rvm/gems/ruby-2.7.0/gems/fastlane-2.142.0/bin/fastlane:$PATH
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# SDKMAN (this has to be the last thing in the file)
-export SDKMAN_DIR="/Users/russell/.sdkman"
-[[ -s "/Users/russell/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/russell/.sdkman/bin/sdkman-init.sh"
+# VS Code as default editor (-w wait until file is closed before returning)
+export EDITOR='code -w'
