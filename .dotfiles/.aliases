@@ -78,5 +78,34 @@ function cheat() {
 	curl cheat.sh/$1
 }
 
+# convert webpage to markdown
+function fuckyeahmarkdown() {
+	curl -X GET http://fuckyeahmarkdown.com/go/\?read=1\&md=1\&u=$1 | cat --language markdown
+}
+
+# convert webpage to epub
+function url-to-epub-pandoc() {
+	curl -X GET http://fuckyeahmarkdown.com/go/\?read=1\&md=1\&u=$1 -o output.md
+	pandoc output.md -o output.epub
+	rm output.md
+	echo "output.epub created"
+}
+
+# convert webpage to epub
+function url-to-epub-calibre() {
+	curl -X GET http://fuckyeahmarkdown.com/go/\?read\=1\&u\=$1\&preview\=1 -o output.html
+	ebook-convert output.html output.epub
+	rm output.html
+	echo "output.epub created"
+}
+
+# convert recipe to markdown
+get-recipe() { 
+	curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc -f html -t markdown
+}
+
 # Open ticket for current branch
 alias ticket="git branch --show-current | grep -Eo '\d+' | xargs -I {} open 'https://depopmarket.atlassian.net/browse/DD-{}'"
+
+# Run northview server ansible-playbook
+alias northview="ansible-playbook ~/code/ansible/playbook.yml -l northview -u rus64"
