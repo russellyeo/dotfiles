@@ -1,14 +1,18 @@
-[push]
-	default = simple
-[credential]
-	helper = osxkeychain
 [core]
 	excludesfile = /Users/$USER/.gitignore_global
 	autocrlf = input
-	editor = subl -n -w
-[user]
-	name = 'Russell Yeo'
-	email = 'rusyeo@gmail.com'
+	editor = code --wait
+[credential]
+	helper = osxkeychain
+[diff]
+	tool = smerge
+[merge]
+    tool = smerge
+[mergetool "smerge"]
+    cmd = 'smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'
+    trustExitCode = true
+[push]
+	default = simple
 [commit]
 	template = /Users/$USER/.stCommitMsg
 [pager]
