@@ -42,3 +42,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # VS Code as default editor (-w wait until file is closed before returning)
 export EDITOR='code -w'
+
+# Pager
+export PAGER='less'

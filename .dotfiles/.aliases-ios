@@ -1,13 +1,13 @@
 # iOS aliases
 
-## bootstrap
-alias ios-bootstrap="sh ~/depop/depop-ios/Scripts/bootstrap_dependencies.sh && terminal-notifier -title '📲 Bootstrap Dependencies' -message 'Finished'"
+## download dependencies
+alias ios-download-dependencies="sh '$IOS'/Scripts/download_dependencies.sh && terminal-notifier -title '📲 Bootstrap Dependencies' -message 'Finished'"
 
 ## run sourcery
 alias sourcerify="sourcery --templates ~/Documents/Sourcery && cat Sourcery/Output.swift | pbcopy && rm Sourcery/Output.swift"
 
 ## start mock server
-alias mockserver="sh ~/depop/depop-ios/Garage/DepopUITests/Base/mockserver/start_server.sh"
+alias mockserver="sh '$IOS'/Garage/DepopUITests/Base/mockserver/start_server.sh"
 
 ## open current design
 alias design="open '$DESIGN'"

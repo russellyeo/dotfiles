@@ -64,8 +64,8 @@ alias today="sed -n '/^## "$(date -u +%Y-%m-%d)"/,"\$p"' $LOG | cat --language m
 alias status="gh pr status && jira && today"
 
 # Assume depop aws roles
-alias assume-data-reader="eval $(depop assume-aws-role --account-name ops-default --role data-reader --export)"
-alias assume-developer="eval $(depop assume-aws-role --account-name ops-default --role developer --export)"
+#alias assume-data-reader="eval $(depop assume-aws-role --account-name ops-default --role data-reader --export)"
+#alias assume-developer="eval $(depop assume-aws-role --account-name ops-default --role developer --export)"
 
 # Sublime
 alias sublime="subl"

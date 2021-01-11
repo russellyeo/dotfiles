@@ -8,5 +8,3 @@
 # Allow specific files and folders
 !.zshrc
 !.gitignore
-!.gitconfig
-!.themes/*
