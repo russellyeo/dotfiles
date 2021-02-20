@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # 
 # Bootstrap script for setting up a new macOS machine.
-# This should be idempotent so it can be run multiple times.
+# This script is idempotent so it can be run multiple times.
 
+# Pretty print
 function alreadyInstalled() {
     echo "\033[33mWarning:\033[0m $1 already installed"
 }
@@ -16,33 +17,13 @@ function action() {
     echo "\033[32m==>\033[0m \033[1m$1\033[0m"
 }
 
-
+# Begin
 step "Bootstrapping"
 
-# Software Updates
+# Software updates
 step "Updating software"
 sudo softwareupdate -iaR --verbose
 xcode-select --install
-
-# oh-my-zsh
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    installing "oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-else 
-    alreadyInstalled "oh-my-zsh" 
-fi 
-
-if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-else
-    alreadyInstalled "zsh-syntax-highlighting"
-fi 
-
-if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-else
-    alreadyInstalled "zsh-autosuggestions"
-fi
 
 # zsh shell
 if [[ ! $(echo $SHELL) == "/bin/zsh" ]]; then 
@@ -53,16 +34,7 @@ else
     alreadyInstalled "zsh"
 fi
 
-# rvm 
-if test ! $(which rvm); then
-    installing "rvm"
-    \curl -sSL https://get.rvm.io | bash -s stable 
-    source ~/.rvm/scripts/rvm
-else
-    alreadyInstalled "rvm"
-fi
-
-# homebrew
+# Homebrew
 if test ! $(which brew); then
     installing "homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -70,12 +42,13 @@ else
     alreadyInstalled "homebrew"
 fi
 
-# sbt via sdkman
-if test ! $(which sbt); then
-    installing "homebrew"
-    curl -s "https://get.sdkman.io" | sdk i sbt
+# RVM 
+if test ! $(which rvm); then
+    installing "rvm"
+    \curl -sSL https://get.rvm.io | bash -s stable 
+    source ~/.rvm/scripts/rvm
 else
-    alreadyInstalled "sbt"
+    alreadyInstalled "rvm"
 fi
 
 # Update homebrew
@@ -94,35 +67,20 @@ brew tap ${TAPS[@]}
 installing "brews"
 BREWS=(
 	ack
-	awscli
     bat
-    coreutils
     carthage
-    chisel
-    crowdin
-    depop/tools/depop-cli
-    depop/tools/dpdb
     diff-so-fancy
     fd
     gh
-    git-lfs
-    go
-    hub
     htop
     jq
     lastpass-cli
     ncdu
     neofetch
-    nvm
     nmap
-    mitmproxy
     pandoc
-    sbt
-    sqlite
     sourcery
     swiftlint
-    terminal-notifier
-    thefuck
     tldr
     tmspzz/homebrew-tap/rome
     tree
@@ -134,14 +92,11 @@ brew install ${BREWS[@]}
 # Install graphical applications
 installing "cask apps"
 CASKS=(
-    adoptopenjdk8
     alfred
     calibre
-    charles
     dropbox
     gpg-suite
     iterm2
-    macpass
     slack
     spotify
     sublime-text
@@ -150,11 +105,14 @@ CASKS=(
     zeplin
 )
 brew cask install ${CASKS[@]}
+
+# Cleanup
 brew cleanup
 
-step "Creating folder structure"
+# Create files and directories
+step "Creating files and directories"
 [[ ! -d ~/.profile ]] && touch ~/.profile
-[[ ! -d ~/code ]] && mkdir ~/code
-[[ ! -d ~/depop ]] && mkdir ~/depop
+[[ ! -d ~/Developer ]] && mkdir ~/Developer
 
+# Finish
 step "Bootstrapping complete"
