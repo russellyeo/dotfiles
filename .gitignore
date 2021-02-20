@@ -1,10 +1,9 @@
 # Ignore everything
 *
 
-# Allow all files in .dotfiles directory except .profile
+# Allow all files in .dotfiles directory
 !.dotfiles/**
-.dotfiles/.profile
 
-# Allow specific files and folders
+# Allow specific files from home directory
 !.zshrc
 !.gitignore
