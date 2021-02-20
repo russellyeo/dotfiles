@@ -1,23 +1,26 @@
-# macOS Install
+# Fresh macOS Install
+
+Set up a new macOS machine with my dotfiles and essential software to recreate my dev environment.
 
 ## Add a new ssh key
 
-Generate new key.
+Generate a new ssh key.
 ```sh
-$ ssh-keygen -t rsa -b 4096
+ssh-keygen -t rsa -b 4096
 ```
-Copy public key to clipboard, ready to paste into GitHub.
+
+Copy public key to clipboard, ready to paste into GitHub or elsewhere.
 ```sh
-$ pbcopy < ~/.ssh/id_rsa.pub
+pbcopy < ~/.ssh/id_rsa.pub
 ```
 
 ## Save ssh key password to keychain
 
 Start the ssh-agent in the background.
 ```sh
-$ eval "$(ssh-agent -s)"
-> Agent pid 59566
+eval "$(ssh-agent -s)"
 ```
+
 Modify ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in the keychain.
 ```sh
 Host *
@@ -25,23 +28,34 @@ Host *
   UseKeychain yes
   IdentityFile ~/.ssh/id_rsa
 ```
+
 Add your SSH private key to the ssh-agent and store your passphrase in the keychain.
 ```sh
-$ ssh-add -K ~/.ssh/id_rsa
+ssh-add -K ~/.ssh/id_rsa
 ```
 
 
-## Bootstrap dependencies
+## Bootstrap
 
-Clone repo and run bootstrap script.
+Set up system dotfiles and run a script to download tools, packages and applications.
+
 ```sh
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME' && \
-git clone --bare git@github.com:rus64/dotfiles.git $HOME/.dotfiles_bare && \
-dotfiles checkout && \
+# Temporarily define the alias in the current shell scope
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
+
+# Clone dotfiles bare repository into the home directory
+git clone --bare git@github.com:rus64/dotfiles.git $HOME/.dotfiles_bare
+
+# Checkout the content from the bare repository
+dotfiles checkout
+
+# Run the bootstrap script
 sh ~/.dotfiles/bootstrap.sh
 ```
 
-## Other packages
+## More downloads
+
+Other software not automated in the above bootstrap script.
 
 ### App Store
 * [Xcode](https://apps.apple.com/gb/app/xcode/id497799835?mt=12)
@@ -56,10 +70,10 @@ sh ~/.dotfiles/bootstrap.sh
 * [API Elements Extension](https://marketplace.visualstudio.com/items?itemName=vncz.vscode-apielements)
 * [Scala Metals](https://marketplace.visualstudio.com/items?itemName=scalameta.metals)
 
+
 ## Resources
-* [ssh key](https://help.github.com/en/articles/working-with-ssh-key-passphrases)
-* [dotfiles](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/)
-* [brew](https://brew.sh)
+* [Working with SSH key passphrases](https://help.github.com/en/articles/working-with-ssh-key-passphrases)
+* [The best way to store your dotfiles: A bare Git repository](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/)
+* [Homebrew](https://brew.sh)
 * [zsh-users](https://github.com/zsh-users)
 * [Apple software downloads](https://developer.apple.com/download/release/)
-
