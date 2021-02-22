@@ -3,7 +3,7 @@ export PATH="/usr/local/bin:$PATH"
 # Load dotfiles
 source $HOME/.profile
 source $HOME/.dotfiles/.aliases
-source $HOME/.dotfiles/.antigen.zsh
+source $HOME/.dotfiles/antigen.zsh
 
 # Antigen
 antigen use oh-my-zsh
