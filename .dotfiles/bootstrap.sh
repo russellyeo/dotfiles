@@ -66,7 +66,7 @@ brew tap ${TAPS[@]}
 # Install command line tools
 installing "brews"
 BREWS=(
-	ack
+    ack
     bat
     carthage
     diff-so-fancy
