@@ -93,13 +93,11 @@ brew install ${BREWS[@]}
 installing "cask apps"
 CASKS=(
     alfred
-    calibre
     dropbox
     gpg-suite
     iterm2
     slack
     spotify
-    sublime-text
     sublime-merge
     visual-studio-code
     zeplin
