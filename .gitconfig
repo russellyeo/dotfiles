@@ -1,0 +1,18 @@
+[user]
+	name = Russell Yeo
+	email = rusyeo@gmail.com
+[credential]
+	helper = osxkeychain
+[core]
+	editor = code -w
+ 	excludesfile = ~/.dotfiles/.gitignore_global
+[pager]
+    diff = diff-so-fancy | less --tabs=4 -RFX
+    show = diff-so-fancy | less --tabs=4 -RFX
+[url "git@github.com:"]
+ 	insteadOf = https://github.com/
+
+# Override [user] for Depop repositories 
+# Keep this at the bottom of the file
+[includeIf "gitdir:~/Developer/Depop/**"]
+  	path = ~/.dotfiles/.gitconfig_depop

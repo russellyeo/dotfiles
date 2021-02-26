@@ -16,3 +16,6 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
 antigen theme candy
 antigen apply
+
+# Shell
+EDITOR="code -w"
