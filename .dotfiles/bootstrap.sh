@@ -68,7 +68,7 @@ installing "brews"
 BREWS=(
     ack
     bat
-    carthage
+    # carthage - latest version (0.36) breaks Xcode 12.2
     diff-so-fancy
     fd
     gh
