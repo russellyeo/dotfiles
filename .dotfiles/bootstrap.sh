@@ -59,6 +59,7 @@ brew tap ${TAPS[@]}
 installing "brews"
 BREWS=(
     ack
+    ansible
     bat
     diff-so-fancy
     fd
