@@ -2,20 +2,23 @@
 
 Set up a new macOS machine with my dotfiles and essential software to recreate my dev environment.
 
-## Add a new ssh key
+## Install Xcode command line tools
+```sh
+xcode-select --install
+```
 
+## Add a new ssh key
 Generate a new ssh key.
 ```sh
 ssh-keygen -t rsa -b 4096
 ```
 
-Copy public key to clipboard, ready to paste into GitHub or elsewhere.
+Copy public key to clipboard, then paste into [GitHub SSH keys](https://github.com/settings/keys). Delete old keys if needed.
 ```sh
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
 ## Save ssh key password to keychain
-
 Start the ssh-agent in the background.
 ```sh
 eval "$(ssh-agent -s)"
@@ -34,33 +37,46 @@ Add your SSH private key to the ssh-agent and store your passphrase in the keych
 ssh-add -K ~/.ssh/id_rsa
 ```
 
-
 ## Bootstrap
-
 Set up system dotfiles and run a script to download tools, packages and applications.
 
+1. Temporarily define the alias in the current shell scope
 ```sh
-# Temporarily define the alias in the current shell scope
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
+```
 
-# Clone dotfiles bare repository into the home directory
+2. Clone dotfiles bare repository into the home directory
+```sh
 git clone --bare git@github.com:rus64/dotfiles.git $HOME/.dotfiles_bare
+```
 
-# Checkout the content from the bare repository
+3. Checkout the content from the bare repository
+```sh
 dotfiles checkout
+```
 
-# Run the bootstrap script
+4. Run the bootstrap script
+```sh
 sh ~/.dotfiles/bootstrap.sh
 ```
 
-## More downloads
+## Configuration
 
+### Set up VS Code to launch from the command line with `code` command
+* Launch VS Code.
+* Open the Command Palette (`Cmd+Shift+P`) and type 'shell command' to find the Shell Command: Install 'code' command in PATH command.
+
+Source: [Launching from the command line](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
+
+## More downloads
 Other software not automated in the above bootstrap script.
 
 ### App Store
-* [Xcode](https://apps.apple.com/gb/app/xcode/id497799835?mt=12)
+* [1Password](https://apps.apple.com/gb/app/1password-7-password-manager/id1333542190?mt=12)
 * [Magnet](https://apps.apple.com/gb/app/magnet/id441258766?mt=12)
-* [NordVPN](https://apps.apple.com/gb/app/nordvpn-ike-unlimited-vpn/id1116599239?mt=12)
+
+### Direct downloads
+* [Sublime Merge](https://www.sublimemerge.com/download)
 
 ### Sublime
 * [Dotfiles Syntax Highlighting](https://packagecontrol.io/packages/Dotfiles%20Syntax%20Highlighting)
@@ -77,3 +93,4 @@ Other software not automated in the above bootstrap script.
 * [Homebrew](https://brew.sh)
 * [zsh-users](https://github.com/zsh-users)
 * [Apple software downloads](https://developer.apple.com/download/release/)
+* [macOS defaults](https://macos-defaults.com/)

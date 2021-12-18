@@ -1,0 +1,34 @@
+# Depop internal endpoints curl requests
+
+## Get user info by username
+function user-by-username() {
+    curl -X GET "https://api-staging.depop.com/internal/v1/users/by-username/$1/"
+}
+
+## Invite user to stripe onboarding by userId
+function stripe-invite() {
+    curl -X PUT "https://payments-default-payments-api.stage-app.dpop.co.uk/internal/v1/invites/$1/"
+}
+
+## GET stripe user by userId
+function stripe-settings() {
+	curl -X GET "https://payments-default-payments-api.stage-app.dpop.co.uk/internal/v1/users/$1/"
+}
+
+# JIRA helpers
+
+## See current status of prs, tickets and log
+alias status="gh pr status && jira && today"
+
+## my issues in current sprint
+alias jira="acli depop --action getIssueList --jql \"project = DD AND assignee = 'russell' AND sprint in openSprints() AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Story Points\" --outputType table"
+
+## iOS issues in current sprint
+alias jira-ios="acli depop --action getIssueList --jql \"project = DD AND team = 'Payments' AND sprint in openSprints() AND applications = 'iOS' AND NOT type = 'Design' AND NOT type = 'Epic' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
+
+## My recently closed issues
+alias jira-done="acli depop --action getIssueList --jql \"project = DD AND status = 'done' AND applications = 'iOS' OR assignee = 'russell'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
+
+# Assume depop aws roles
+#alias assume-data-reader="eval $(depop assume-aws-role --account-name ops-default --role data-reader --export)"
+#alias assume-developer="eval $(depop assume-aws-role --account-name ops-default --role developer --export)"

@@ -35,82 +35,79 @@ else
 fi
 
 # Homebrew
+
+## Install homebrew
 if test ! $(which brew); then
     installing "homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     alreadyInstalled "homebrew"
 fi
 
-# RVM 
-if test ! $(which rvm); then
-    installing "rvm"
-    \curl -sSL https://get.rvm.io | bash -s stable 
-    source ~/.rvm/scripts/rvm
-else
-    alreadyInstalled "rvm"
-fi
-
-# Update homebrew
+## Update homebrew
 brew update
 
-# Tap brew repositories
+## Tap brew repositories
 installing "brew taps"
 TAPS=(
-	AdoptOpenJDK/openjdk
-    tmspzz/tap https://github.com/tmspzz/homebrew-tap.git
-    depop/tools
+	adoptopenjdk/openjdk
+    robotsandpencils/made
 )
 brew tap ${TAPS[@]}
 
-# Install command line tools
+## Install command line tools
 installing "brews"
 BREWS=(
     ack
     bat
-    # carthage - latest version (0.36) breaks Xcode 12.2
     diff-so-fancy
     fd
+    fzf
     gh
     htop
     jq
-    lastpass-cli
     ncdu
-    neofetch
     nmap
     pandoc
-    sourcery
-    swiftlint
-    tldr
-    tmspzz/homebrew-tap/rome
     tree
-    vault
-    z
+    xcodes
 )
 brew install ${BREWS[@]}
 
-# Install graphical applications
+## Install graphical applications
 installing "cask apps"
 CASKS=(
-    alfred
+    adoptopenjdk8
     dropbox
-    gpg-suite
     iterm2
+    raycast
     slack
     spotify
-    sublime-merge
-    visual-studio-code
-    zeplin
+    visual-studio-code    
 )
-brew cask install ${CASKS[@]}
+brew install --cask ${CASKS[@]}
 
-# Cleanup
+## Cleanup
 brew cleanup
 
 # Create files and directories
 step "Creating files and directories"
 [[ ! -d ~/.profile ]] && touch ~/.profile
 [[ ! -d ~/Developer ]] && mkdir ~/Developer
+[[ ! -d ~/Documents/Screenshots ]] && mkdir ~/Documents/Screenshots
+
+# Set macOS defaults
+step "Setting macOS defaults"
+
+## Autohide dock
+defaults write com.apple.dock "autohide" -bool "true" && killall Dock
+
+## Set screenshots default folder to ~/Documents/Screenshots
+defaults write com.apple.screencapture "location" -string "~/Documents/Screenshots" && killall SystemUIServer
+defaults write com.apple.iphonesimulator "ScreenShotSaveLocation" -string "~/Documents/Screenshots"
+
+## Set Xcode counterpart files (VIPER)
+defaults write com.apple.dt.Xcode "IDEAdditionalCounterpartSuffixes" -array-add "ViewController" "Interactor" "Presenter" "ViewModel" "Router" "Screen" && killall Xcode
 
 # Finish
 step "Bootstrapping complete"
