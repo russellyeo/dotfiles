@@ -21,14 +21,25 @@ function stripe-settings() {
 alias status="gh pr status && jira && today"
 
 ## my issues in current sprint
-alias jira="acli depop --action getIssueList --jql \"project = DD AND assignee = 'russell' AND sprint in openSprints() AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Story Points\" --outputType table"
+alias jira="acli depop --action getIssueList --jql \"project = PAYMENTS AND assignee = 'russell' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Story Points\" --outputType table"
 
 ## iOS issues in current sprint
-alias jira-ios="acli depop --action getIssueList --jql \"project = DD AND team = 'Payments' AND sprint in openSprints() AND applications = 'iOS' AND NOT type = 'Design' AND NOT type = 'Epic' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
+alias jira-ios="acli depop --action getIssueList --jql \"project = PAYMENTS AND team = 'Buyers Experience' AND applications = 'iOS' AND NOT type = 'Design' AND NOT type = 'Epic' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Reporter,Created,Story Points\" --outputType table"
+
+## iOS issues in a release version
+function jira-ios-release() {
+	acli depop --action getIssueList --jql "fixVersion = iOS_2.153 OR 'Depop release version[Dropdown]' = iOS_2.153" --columns "Key,Summary,Type,Status,Priority,Reporter,Created,Story Points" --outputType table
+}
+
+## Buyers Experience iOS issues in a release version
+function jira-buyers-ios-release() {
+	acli depop --action getIssueList --jql "'Team[Dropdown]' = 'Buyers Experience' AND (fixVersion = iOS_2.153 OR 'Depop release version[Dropdown]' = iOS_2.153)" --columns "Key,Summary,Type,Status,Priority,Reporter,Created,Story Points" --outputType table
+}
 
 ## My recently closed issues
-alias jira-done="acli depop --action getIssueList --jql \"project = DD AND status = 'done' AND applications = 'iOS' OR assignee = 'russell'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
+alias jira-done="acli depop --action getIssueList --jql \"project = PAYMENTS AND status = 'done' AND applications = 'iOS' OR assignee = 'russell'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
 
 # Assume depop aws roles
 #alias assume-data-reader="eval $(depop assume-aws-role --account-name ops-default --role data-reader --export)"
 #alias assume-developer="eval $(depop assume-aws-role --account-name ops-default --role developer --export)"
+

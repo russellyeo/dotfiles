@@ -54,3 +54,6 @@ function xctest() {
 	  xcpretty --simple --color && \
 	  terminal-notifier -title '🛠 xcodebuild test' -message 'Finished'
 }
+
+# find pertinent stuff in bitrise logs
+alias ios-logs="ack $'\u274C' ~/Downloads/*.txt && ack 'Failing tests' -A 20 ~/Downloads/*.txt"
