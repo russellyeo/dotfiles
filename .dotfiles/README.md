@@ -62,6 +62,9 @@ sh ~/.dotfiles/bootstrap.sh
 
 ## Configuration
 
+### Set up iTerm
+In `Preferences > General > Preferences` select "Load preferences from a custom folder or URL" and set it to `~/.dotfiles/iTerm2/`.
+
 ### Set up VS Code to launch from the command line with `code` command
 * Launch VS Code.
 * Open the Command Palette (`Cmd+Shift+P`) and type 'shell command' to find the Shell Command: Install 'code' command in PATH command.

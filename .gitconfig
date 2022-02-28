@@ -5,12 +5,12 @@
 	helper = osxkeychain
 [core]
 	editor = code -w
- 	excludesfile = ~/.dotfiles/.gitignore_global
+	excludesfile = ~/.dotfiles/.gitignore_global
 [pager]
-    	diff = diff-so-fancy | less --tabs=4 -RFX
-    	show = diff-so-fancy | less --tabs=4 -RFX
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
 
 # Override [user] for Depop repositories 
 # Keep this at the bottom of the file
 [includeIf "gitdir:~/Developer/Depop/**"]
-    	path = ~/.dotfiles/.gitconfig_depop
+	path = ~/.dotfiles/.gitconfig_depop
