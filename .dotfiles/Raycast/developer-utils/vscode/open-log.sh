@@ -14,4 +14,4 @@
 # @raycast.author Russell Yeo
 # @raycast.authorURL https://github.com/rus64
 
-code -n ~/Dropbox/Notes/logs/2021.md
+code -n ~/Dropbox/Notes/log.md
