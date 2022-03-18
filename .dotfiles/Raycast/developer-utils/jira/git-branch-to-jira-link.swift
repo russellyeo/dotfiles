@@ -8,7 +8,7 @@
 // Optional parameters:
 // @raycast.icon images/jira.png
 // @raycast.packageName Developer Utilities
-// @raycast.argument1 { "type": "text", "placeholder": "Git branch" }
+// @raycast.argument1 { "type": "text", "placeholder": "Ticket number" }
 
 // Documentation:
 // @raycast.description Opens a Jira Link from a feature branch name in clipboard
