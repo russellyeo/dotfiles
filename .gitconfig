@@ -1,17 +1,18 @@
 [user]
 	name = Russell Yeo
 	email = rusyeo@gmail.com
+# Override [user] for Depop repositories
+[includeIf "gitdir:~/Developer/Depop/**"]
+	path = ~/.dotfiles/.gitconfig_depop
 [credential]
 	helper = osxkeychain
 [core]
-	editor = code -w
+	editor = code --wait
 	excludesfile = ~/.dotfiles/.gitignore_global
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
 [init]
 	defaultBranch = main
-# Override [user] for Depop repositories
-# Keep this at the bottom of the file
-[includeIf "gitdir:~/Developer/Depop/**"]
-	path = ~/.dotfiles/.gitconfig_depop
+[merge]
+	tool = smerge
