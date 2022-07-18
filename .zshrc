@@ -3,6 +3,8 @@
 # Environment
 export PATH="/usr/local/bin:$PATH"
 export EDITOR="code --wait"
+export SBT_CREDENTIALS="$HOME/.sbt/.depop-credentials"
+export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
 
 # Load dotfiles
 source $HOME/.profile
