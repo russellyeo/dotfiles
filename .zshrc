@@ -1,7 +1,9 @@
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+
 # Environment
 export PATH="/usr/local/bin:$PATH"
+export PATH="$PATH:/Users/russell/Library/Application Support/Coursier/bin"
 export EDITOR="code --wait"
 export SBT_CREDENTIALS="$HOME/.sbt/.depop-credentials"
 export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
