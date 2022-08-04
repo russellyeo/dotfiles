@@ -60,10 +60,26 @@ dotfiles checkout
 sh ~/.dotfiles/bootstrap.sh
 ```
 
-## Configuration
+## Configure
 
 ### Set up iTerm
 In `Preferences > General > Preferences` select "Load preferences from a custom folder or URL" and set it to `~/.dotfiles/iTerm2/`.
+
+### Xcode
+Download and install Xcode from [Apple](https://developer.apple.com/download/release/) then ensure the correct Command Line Tools are set
+
+```sh
+sudo xcode-select -p
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
+
+Once Xcode has been installed at least once, use xcodes to manage updates
+
+```sh
+brew install robotsandpencils/made/xcodes
+xcodes update
+xcodes list
+```
 
 ### Set up VS Code to launch from the command line with `code` command
 * Launch VS Code.
@@ -88,7 +104,7 @@ Other software not automated in the above bootstrap script.
 ### VS Code
 * [API Elements Extension](https://marketplace.visualstudio.com/items?itemName=vncz.vscode-apielements)
 * [Scala Metals](https://marketplace.visualstudio.com/items?itemName=scalameta.metals)
-
+* [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
 
 ## Resources
 * [Working with SSH key passphrases](https://help.github.com/en/articles/working-with-ssh-key-passphrases)

@@ -5,7 +5,7 @@
 
 # Pretty print
 function alreadyInstalled() {
-    echo "\033[33mWarning:\033[0m $1 already installed"
+    echo "\033[33mNote:\033[0m $1 already installed"
 }
 function installing() {
     echo "\033[32m==>\033[0m \033[1mInstalling\033[1;32m $1\033[0m"
@@ -40,6 +40,7 @@ fi
 if test ! $(which brew); then
     installing "homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
 else
     alreadyInstalled "homebrew"
 fi
@@ -50,10 +51,14 @@ brew update
 ## Tap brew repositories
 installing "brew taps"
 TAPS=(
-	adoptopenjdk/openjdk
-    robotsandpencils/made
+    depop/tools
+    tmspzz/tap
+    VirtusLab/git-machete
 )
-brew tap ${TAPS[@]}
+for TAP in ${TAPS[@]} 
+do
+    brew tap $TAP
+done
 
 ## Install command line tools
 installing "brews"
@@ -61,51 +66,55 @@ BREWS=(
     ack
     ansible
     bat
+    carthage
+    depop/tools/depop-cli
     diff-so-fancy
     fd
     fzf
     gh
+    git
+    git-machete
     htop
     jq
+    mint
     ncdu
     nmap
     pandoc
+    tmspzz/homebrew-tap/rome
     tree
-    xcodes
 )
 brew install ${BREWS[@]}
 
 ## Install graphical applications
 installing "cask apps"
-CASKS=(
-    adoptopenjdk8
+CASKS=(    
     dropbox
     iterm2
     raycast
     slack
     spotify
-    visual-studio-code    
+    visual-studio-code
 )
 brew install --cask ${CASKS[@]}
 
 ## Cleanup
 brew cleanup
 
+## Install mint packages
+MINTS=(
+    RobotsAndPencils/xcodes
+)
+mint install ${MINTS[@]}
+
 # Create files and directories
 step "Creating files and directories"
-[[ ! -d ~/.profile ]] && touch ~/.profile
 [[ ! -d ~/Developer ]] && mkdir ~/Developer
-[[ ! -d ~/Documents/Screenshots ]] && mkdir ~/Documents/Screenshots
 
 # Set macOS defaults
 step "Setting macOS defaults"
 
 ## Autohide dock
 defaults write com.apple.dock "autohide" -bool "true" && killall Dock
-
-## Set screenshots default folder to ~/Documents/Screenshots
-defaults write com.apple.screencapture "location" -string "~/Documents/Screenshots" && killall SystemUIServer
-defaults write com.apple.iphonesimulator "ScreenShotSaveLocation" -string "~/Documents/Screenshots"
 
 ## Set Xcode counterpart files (VIPER)
 defaults write com.apple.dt.Xcode "IDEAdditionalCounterpartSuffixes" -array-add "ViewController" "Interactor" "Presenter" "ViewModel" "Router" "Screen" && killall Xcode

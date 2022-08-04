@@ -1,20 +1,18 @@
 [user]
 	name = Russell Yeo
 	email = rusyeo@gmail.com
-# Override [user] for Depop repositories
-[includeIf "gitdir:~/Developer/Depop/**"]
-	path = ~/.dotfiles/.gitconfig_depop
 [credential]
 	helper = osxkeychain
 [core]
-	# pager = delta
 	editor = code --wait
 	excludesfile = ~/.dotfiles/.gitignore_global
-# [interactive]
-    # diffFilter = delta --color-only
-# [delta]
-    # navigate = true 
-	# side-by-side = true
+	compression = 1
+	packedGitLimit = 512m 
+    packedGitWindowSize = 512m
+[pack] 
+    deltaCacheSize = 2047m 
+    packSizeLimit = 2047m 
+    windowMemory = 2047m
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
@@ -24,3 +22,8 @@
 	tool = smerge
 [diff]
     colorMoved = default
+[url "git@github.com:"]
+    insteadOf = "https://github.com/"
+# Override gitconfig for Depop repositories
+[includeIf "gitdir:~/Developer/Depop/**"]
+	path = ~/.dotfiles/.gitconfig_depop
