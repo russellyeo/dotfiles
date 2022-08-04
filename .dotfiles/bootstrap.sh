@@ -105,6 +105,7 @@ CASKS=(
     dropbox
     iterm2
     raycast
+    proxyman
     slack
     spotify
     visual-studio-code
