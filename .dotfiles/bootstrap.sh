@@ -92,6 +92,7 @@ BREWS=(
     nmap
     pandoc
     rust
+    swiftgen
     tmspzz/homebrew-tap/rome
     tree
 )
@@ -99,7 +100,8 @@ brew install ${BREWS[@]}
 
 ## Install graphical applications
 installing "cask apps"
-CASKS=(    
+CASKS=(
+    bitwarden
     dropbox
     iterm2
     raycast
