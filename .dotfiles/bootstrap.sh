@@ -5,10 +5,13 @@
 
 # Pretty print
 function alreadyInstalled() {
-    echo "\033[33mNote:\033[0m $1 already installed"
+    echo "\033[33mWarning:\033[0m $1 already installed"
 }
 function installing() {
     echo "\033[32m==>\033[0m \033[1mInstalling\033[1;32m $1\033[0m"
+}
+function updating() {
+    echo "\033[32m==>\033[0m \033[1mUpdating\033[1;32m $1\033[0m"
 }
 function step() {
     echo "\033[34m==>\033[0m \033[1m$1\033[0m"
@@ -60,6 +63,14 @@ do
     brew tap $TAP
 done
 
+## Update brew + upgrade brews/casks
+updating "brew"
+brew update
+updating "brews"
+brew upgrade
+updating "brew casks"
+brew upgrade --cask
+
 ## Install command line tools
 installing "brews"
 BREWS=(
@@ -80,6 +91,7 @@ BREWS=(
     ncdu
     nmap
     pandoc
+    rust
     tmspzz/homebrew-tap/rome
     tree
 )
