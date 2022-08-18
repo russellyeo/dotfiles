@@ -76,6 +76,7 @@ installing "brews"
 BREWS=(
     ack
     ansible
+    aria2
     bat
     carthage
     depop/tools/depop-cli
@@ -93,6 +94,7 @@ BREWS=(
     pandoc
     rust
     swiftgen
+    swiftlint
     tmspzz/homebrew-tap/rome
     tree
 )
@@ -108,7 +110,9 @@ CASKS=(
     proxyman
     slack
     spotify
+    sublime-merge
     visual-studio-code
+    vlc
 )
 brew install --cask ${CASKS[@]}
 
