@@ -7,7 +7,7 @@
 	editor = code --wait
 	excludesfile = ~/.dotfiles/.gitignore_global
 	compression = 1
-	packedGitLimit = 512m 
+	packedGitLimit = 512m
     packedGitWindowSize = 512m
 [pack] 
     deltaCacheSize = 2047m 
@@ -22,8 +22,6 @@
 	tool = smerge
 [diff]
     colorMoved = default
-[url "git@github.com:"]
-    insteadOf = "https://github.com/"
 # Override gitconfig for Depop repositories
 [includeIf "gitdir:~/Developer/Depop/**"]
 	path = ~/.dotfiles/.gitconfig_depop
