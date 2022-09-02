@@ -3,8 +3,6 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
 export PATH="$PATH:$HOME/.mint/bin"
 export EDITOR="code --wait"
-export SBT_CREDENTIALS="$HOME/.sbt/.depop-credentials"
-export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
 
 # Load dotfiles
 source $HOME/.dotfiles/.aliases
@@ -29,3 +27,8 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Tokens
 export HOMEBREW_GITHUB_API_TOKEN=$(security find-generic-password -s 'Homebrew GitHub Token' -w)
+
+# Scala
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home"
+export SBT_CREDENTIALS="$HOME/.sbt/.depop-credentials"
+export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
