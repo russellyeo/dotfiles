@@ -4,7 +4,9 @@ export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
 export PATH="$PATH:$HOME/.mint/bin"
 export PATH="$PATH:/Users/russell/.bin"
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+export PATH="$PATH:/Users/russellyeo/ACLI"
 export EDITOR="code --wait"
+export COLUMNS="120"
 
 # Load dotfiles
 source $HOME/.dotfiles/.aliases
@@ -29,6 +31,13 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Tokens
 export HOMEBREW_GITHUB_API_TOKEN=$(security find-generic-password -s 'Homebrew GitHub Token' -w)
+
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Scala
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
+export SBT_CREDENTIALS="$HOME/.sbt/.depop-credentials"
+export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
