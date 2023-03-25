@@ -3,6 +3,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
 export PATH="$PATH:$HOME/.mint/bin"
 export PATH="$PATH:/Users/russell/.bin"
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 export EDITOR="code --wait"
 
 # Load dotfiles
@@ -28,4 +29,6 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Tokens
 export HOMEBREW_GITHUB_API_TOKEN=$(security find-generic-password -s 'Homebrew GitHub Token' -w)
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
