@@ -5,23 +5,33 @@
 	helper = osxkeychain
 [core]
 	editor = code --wait
+	pager = delta
 	excludesfile = ~/.dotfiles/.gitignore_global
 	compression = 1
 	packedGitLimit = 512m
-    packedGitWindowSize = 512m
+  packedGitWindowSize = 512m
 [pack] 
-    deltaCacheSize = 2047m 
-    packSizeLimit = 2047m 
-    windowMemory = 2047m
-[pager]
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
+  deltaCacheSize = 2047m
+  packSizeLimit = 2047m 
+  windowMemory = 2047m
 [init]
 	defaultBranch = main
 [merge]
 	tool = smerge
+	conflictstyle = diff3
 [diff]
-    colorMoved = default
+  colorMoved = default
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  light = false
+	side-by-side = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 # Override gitconfig for Depop repositories
 [includeIf "gitdir:~/Developer/Depop/**"]
 	path = ~/.dotfiles/.gitconfig_depop
