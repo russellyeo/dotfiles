@@ -1,3 +1,15 @@
+# Status
+
+## See current status of branches, prs, and tickets
+function status() {
+	echo "\nMy branches\n"
+	git machete status
+    echo "\n"
+	gh pr status
+	echo "\nMy tickets\n"
+	jira
+}
+
 # Depop internal endpoints curl requests
 
 ## Get user info by username
@@ -5,20 +17,7 @@ function user-by-username() {
     curl -X GET "https://api-staging.depop.com/internal/v1/users/by-username/$1/"
 }
 
-## Invite user to stripe onboarding by userId
-function stripe-invite() {
-    curl -X PUT "https://payments-default-payments-api.stage-app.dpop.co.uk/internal/v1/invites/$1/"
-}
-
-## GET stripe user by userId
-function stripe-settings() {
-	curl -X GET "https://payments-default-payments-api.stage-app.dpop.co.uk/internal/v1/users/$1/"
-}
-
-# JIRA helpers
-
-## See current status of branches, prs, and tickets
-alias status="git machete status && gh pr status && jira"
+# Jira helpers
 
 ## my issues in current sprint
 alias jira="acli depop --action getIssueList --jql \"project = SEARCH AND assignee = 'russell' AND NOT status = 'done' AND NOT status = 'abandoned'\" --columns \"Key,Summary,Type,Status,Priority,Story Points\" --outputType table"
@@ -28,20 +27,26 @@ alias jira-ios="acli depop --action getIssueList --jql \"project = SEARCH AND te
 
 ## iOS issues in a release version
 function jira-ios-release() {
-	acli depop --action getIssueList --jql "fixVersion = iOS_2.153 OR 'Depop release version[Dropdown]' = iOS_2.153" --columns "Key,Summary,Type,Status,Priority,Reporter,Created,Story Points" --outputType table
-}
-
-## Buyers Experience iOS issues in a release version
-function jira-buyers-ios-release() {
-	acli depop --action getIssueList --jql "'Team[Dropdown]' = 'Buyers Experience' AND (fixVersion = iOS_2.153 OR 'Depop release version[Dropdown]' = iOS_2.153)" --columns "Key,Summary,Type,Status,Priority,Reporter,Created,Story Points" --outputType table
+	acli depop --action getIssueList --jql "fixVersion = $1 OR 'Depop release version[Dropdown]' = $1" --columns "Key,Summary,Type,Status,Priority,Reporter,Created,Story Points" --outputType table
 }
 
 ## My recently closed issues
 alias jira-done="acli depop --action getIssueList --jql \"project = SEARCH AND status = 'done' AND applications = 'iOS' OR assignee = 'russell'\" --limit 10 --columns Key,Summary,Type,Status,Priority,Reporter,Created --outputType table"
 
-# Assume depop aws roles
-#alias assume-data-reader="eval $(depop assume-aws-role --account-name ops-default --role data-reader --export)"
-#alias assume-developer="eval $(depop assume-aws-role --account-name ops-default --role developer --export)"
+# Backend
 
-# Close Xcode and regenerate tuist project
-alias regenerate="osascript -e 'tell application \"Xcode\" to quit' && cd ~/Developer/Depop/depop-ios && make generate_tuist"
+# Assume depop aws roles
+# alias assume-data-reader="eval $(depop assume-aws-role --account-name ops-default --role data-reader --export)"
+# alias assume-developer="eval $(depop assume-aws-role --account-name ops-default --role developer --export)"
+
+# iOS Project
+
+## Regenerate the project
+function regenerate() {
+    echo "Quitting Xcode"
+    osascript -e 'tell app "Xcode" to quit'
+    echo "Switching to depop-ios directory"
+    cd ~/Developer/Depop/depop-ios
+    echo "Generating project with Tuist"
+    make generate_tuist
+}
