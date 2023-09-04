@@ -4,6 +4,9 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
 # Run bootstrap script
 alias bootstrap="sh ~/.dotfiles/bootstrap.sh"
 
+# git 
+alias gm="git machete"
+
 # Shell configuration
 alias zshconfig="code ~/.zshrc"
 alias zshaliases="code ~/.aliases"
@@ -11,24 +14,14 @@ alias ohmyzsh="code ~/.oh-my-zsh"
 alias zshreload=". ~/.zshrc"
 alias zshclearhistory='echo "" > ~/.zsh_history & exec $SHELL -l'
 
-# load other alias files
-source $HOME/.dotfiles/.aliases-ios
-source $HOME/.dotfiles/.aliases-depop
-
 # weather
 alias weather='curl wttr.in'
-
-# notes
-alias notes="code ~/Dropbox/notes/"
 
 # bat the cat
 alias cat="bat"
 
 # See today in log.md
 alias today="sed -n '/^## "$(date -u +%Y-%m-%d)"/,"\$p"' $LOG | cat --language markdown --paging never --style=plain | glow -"
-
-# Git fixup staged changes
-alias fixup="git commit --fixup=HEAD && git rebase --interactive --autosquash HEAD~2"
 
 # Search diff from <commit or branch> for TODOs
 function todo-since() {
@@ -67,4 +60,4 @@ get-recipe() {
 }
 
 # Open ticket for current branch
-alias ticket="git branch --show-current | grep -Eo '\d+' | xargs -I {} open 'https://depopmarket.atlassian.net/browse/PAYMENTS-{}'"
+alias ticket="git branch --show-current | grep -Eo '\d+' | xargs -I {} open 'https://depopmarket.atlassian.net/browse/SEARCH-{}'"
