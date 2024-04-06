@@ -17,19 +17,19 @@ source $HOME/.dotfiles/.aliases-ios
 source $HOME/.dotfiles/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle command-not-found
-# antigen bundle git
-# antigen bundle pip
-# antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen bundle zsh-users/zsh-autosuggestions
-# antigen bundle zsh-users/zsh-completions
-# antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle git
+antigen bundle pip
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
 antigen apply
 
 # ZSH
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-# Tokens
-# export HOMEBREW_GITHUB_API_TOKEN=$(security find-generic-password -s 'Homebrew GitHub Token' -w)
+# Git machete
+eval "$(git machete completion zsh)"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -38,5 +38,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # Scala
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
-export SBT_CREDENTIALS="$HOME/.sbt/.depop-credentials"
-export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
+

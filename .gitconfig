@@ -4,8 +4,8 @@
 [credential]
 	helper = osxkeychain
 [core]
+	pager = git delta
 	editor = code --wait
-	pager = delta
 	excludesfile = ~/.dotfiles/.gitignore_global
 	compression = 1
 	packedGitLimit = 512m
@@ -22,16 +22,19 @@
 [diff]
   colorMoved = default
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = git delta --color-only
 [delta]
   navigate = true
-  light = false
 	side-by-side = true
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[include]
+  path = ~/.dotfiles/delta/themes.gitconfig
 # Override gitconfig for Depop repositories
 [includeIf "gitdir:~/Developer/Depop/**"]
 	path = ~/.dotfiles/.gitconfig_depop
+[alias]
+	delta = !delta $(defaults read -g AppleInterfaceStyle &>/dev/null || echo --light)
