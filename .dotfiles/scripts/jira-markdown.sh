@@ -2,7 +2,7 @@
 
 # Set variables
 JIRA_TICKET="$1"
-OUTPUT_DIR="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Russell/02 Notes/Tickets"
+OUTPUT_DIR="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Russell/Tickets"
 
 TMP_TICKET="/tmp/ticket.json"
 TMP_DESCRIPTION="/tmp/description.html"
@@ -29,6 +29,10 @@ ticket_resolution=$(jq -r '.resolution' $TMP_TICKET)
 ticket_description=$(jq -r '.description' $TMP_TICKET)
 ticket_acceptance_criteria=$(jq -r '.acceptanceCriteria' $TMP_TICKET)
 
+# Format data
+ticket_created_formatted=$(date -j -f "%m/%d/%y, %H:%M %p" "$ticket_created" "+%Y-%m-%d")
+echo "[DEBUG] Formatting date: $ticket_created. Output: $ticket_created_formatted"
+
 # Convert JIRA formatting to Markdown using pandoc
 pandoc -f jira -t html <<< "$ticket_description" | pandoc -f html -t markdown --wrap=none -o "$TMP_DESCRIPTION"
 pandoc -f jira -t html <<< "$ticket_acceptance_criteria" | pandoc -f html -t markdown --wrap=none -o "$TMP_ACCEPTANCE_CRITERIA"
@@ -39,24 +43,28 @@ output_file="$OUTPUT_DIR/$JIRA_TICKET $ticket_summary.md"
 touch "$output_file"
 {
   echo "---"
-  echo "tags: jira_issue"
-  echo "id: $JIRA_TICKET"
+  echo "ticket: $JIRA_TICKET"
   echo "epic: $ticket_epic_link"
   echo "assignee: $ticket_assignee"
   echo "reporter: $ticket_reporter"
-  echo "created: $ticket_created"
   echo "priority: $ticket_priority"
-  echo "resolution: $ticket_resolution"
+  echo "created: $ticket_created_formatted"
+  echo "tags: depop/tickets"
   echo "---"
+  echo ""
   echo "## Description"
   cat "$TMP_DESCRIPTION"
   echo ""
   echo "## Acceptance Criteria"
   cat "$TMP_ACCEPTANCE_CRITERIA"
   echo ""
-  echo ""
 } > "$output_file"
 
+# Cleanup
 rm $TMP_DESCRIPTION
 rm $TMP_ACCEPTANCE_CRITERIA
-echo "Markdown file created successfully: $output_file"
+
+# Report success
+if [ -f "$output_file" ]; then
+    echo "Markdown file created successfully: $output_file"
+fi
