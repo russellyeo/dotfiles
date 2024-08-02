@@ -32,7 +32,7 @@
 	prompt = false
 	trustExitCode = true
 [interactive]
-  diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only --detect-dark-light always
 [delta]
   navigate = true
 	side-by-side = true
