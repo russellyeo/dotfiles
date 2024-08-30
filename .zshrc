@@ -13,7 +13,7 @@ source $HOME/.dotfiles/.aliases
 source $HOME/.dotfiles/.aliases-depop
 source $HOME/.dotfiles/.aliases-ios
 
-# # Antigen
+# Antigen
 source $HOME/.dotfiles/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle command-not-found
@@ -41,3 +41,6 @@ export NVM_DIR="$HOME/.nvm"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
 # export SBT_CREDENTIALS="$HOME/.sbt/.depop-credentials"
 # export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
+
+# Mise
+eval "$(~/.local/bin/mise activate zsh)"
