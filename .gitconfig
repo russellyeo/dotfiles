@@ -41,6 +41,17 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[alias]
+	# Edit the git machete file
+  	me = machete edit
+	# List the current branch structure
+  	ms = machete status --list-commits
+	# Run machete traverse
+  	mt = machete traverse
+	# Create a pull request
+	pr = !code --wait .git/info/description && code --wait .git/info/reviewers && git machete github create-pr
+	# Create a draft pull request
+	draft-pr = !code --wait .git/info/description && code --wait .git/info/reviewers && git machete github create-pr --draft
 # Override gitconfig for Depop repositories
 [includeIf "gitdir:~/Developer/Depop/**"]
 	path = ~/.dotfiles/.gitconfig_depop
