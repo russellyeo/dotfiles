@@ -1,10 +1,13 @@
 # Environment
 export PATH="/usr/local/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="$PATH:$HOME/Library/Application\ Support/Coursier/bin"
 export PATH="$PATH:$HOME/.mint/bin"
 export PATH="$PATH:/Users/russell/.bin"
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 export PATH="$PATH:/Users/russellyeo/ACLI"
+
+# Shell configuration
 export EDITOR="code --wait"
 export COLUMNS="120"
 
@@ -43,4 +46,4 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home
 # export COURSER_CREDENTIALS="$HOME/.sbt/.depop-credentials"
 
 # Mise
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
