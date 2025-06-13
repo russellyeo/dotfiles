@@ -9,32 +9,17 @@
 	excludesfile = ~/.dotfiles/.gitignore_global
 	compression = 1
 	packedGitLimit = 512m
-  packedGitWindowSize = 512m
+  	packedGitWindowSize = 512m
 [pack] 
   deltaCacheSize = 2047m
   packSizeLimit = 2047m 
   windowMemory = 2047m
 [init]
 	defaultBranch = main
-[merge]
-	tool = Kaleidoscope
-	conflictstyle = diff3
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
-[mergetool]
-	prompt = false
-[diff]
-	tool = kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[difftool]
-	prompt = false
-	trustExitCode = true
 [interactive]
-  diffFilter = delta --color-only --detect-dark-light always
+  	diffFilter = delta --color-only --detect-dark-light always
 [delta]
-  navigate = true
+  	navigate = true # use n and N to move between diff sections
 	side-by-side = true
 [filter "lfs"]
 	required = true
@@ -49,9 +34,11 @@
 	# Run machete traverse
   	mt = machete traverse
 	# Create a pull request
-	pr = !code --wait .git/info/description && code --wait .git/info/reviewers && git machete github create-pr
+	create-pr = !~/.dotfiles/scripts/ios-create-pr.sh
 	# Create a draft pull request
-	draft-pr = !code --wait .git/info/description && code --wait .git/info/reviewers && git machete github create-pr --draft
+	create-draft-pr = !~/.dotfiles/scripts/ios-create-draft-pr.sh
 # Override gitconfig for Depop repositories
 [includeIf "gitdir:~/Developer/Depop/**"]
 	path = ~/.dotfiles/.gitconfig_depop
+[mergetool]
+	keepBackup = false
