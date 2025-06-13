@@ -8,10 +8,7 @@ Below is a diff of all changes on the current branch, coming from the command:
 git machete diff
 \`\`\`
 
-Please generate a comprehensive pull request description for these changes. Include:
-1. A brief summary of the changes
-2. The main features or fixes implemented
-3. Any important technical details
+Please generate a concise pull request description for these changes, in markdown.
 "
 
 # Function to generate PR description
@@ -37,13 +34,19 @@ while true; do
     printf "Proposed pull request description:\n\n"
     printf "%s\n\n" "$pr_description"
     
-    read_input "Do you want to (a)ccept, (e)dit, (r)egenerate, or (c)ancel? "
+    read_input "Do you want to (a)ccept, (c)opy, (e)dit, (r)egenerate, or e(x)it? "
     choice=$REPLY
 
     case "$choice" in
         a|A )
             echo "$pr_description" > .git/info/description
             printf "\nPull request description saved to .git/info/description\n\n"
+            break
+            ;;
+        c|C )
+            printf "\nCopying pull request description to clipboard...\n\n"
+            echo "$pr_description" | pbcopy
+            printf "Pull request description copied to clipboard.\n\n"
             break
             ;;
         e|E )
@@ -57,7 +60,7 @@ while true; do
             printf "\nRegenerating pull request description...\n\n"
             pr_description=$(generate_pr_description)
             ;;
-        c|C )
+        x|X )
             printf "\nOperation cancelled.\n\n"
             exit 1
             ;;
