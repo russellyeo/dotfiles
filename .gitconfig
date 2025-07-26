@@ -1,44 +1,144 @@
+################################################################################
+##
+##     ██████╗ ██╗████████╗ ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
+##    ██╔════╝ ██║╚══██╔══╝██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
+##    ██║  ███╗██║   ██║   ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+##    ██║   ██║██║   ██║   ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+##    ╚██████╗██║   ██║   ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+##     ╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
+##
+################################################################################
+
 [user]
+	# User identity for commits
 	name = Russell Yeo
 	email = rusyeo@gmail.com
 [credential]
+	# Use macOS Keychain to store credentials securely
 	helper = osxkeychain
 [core]
+	# Use delta as the pager for better diff viewing
 	pager = delta
+	# Use VS Code as the default editor with wait flag
 	editor = code --wait
+	# Global gitignore file location
 	excludesfile = ~/.gitignore_global
-	compression = 1
-	packedGitLimit = 512m
-  	packedGitWindowSize = 512m
-[pack] 
-  deltaCacheSize = 2047m
-  packSizeLimit = 2047m 
-  windowMemory = 2047m
+	# Compress repository data to save space (0-9, 9 is highest compression)
+	compression = 9
+	# Treat trailing whitespace as an error to maintain code quality
+	whitespace = error
+	# Preload the index in the background to improve performance
+	preloadIndex = true
+[advice]
+	# Suppress status hint messages to reduce output verbosity
+	statusHints = false
 [init]
+	# Use 'main' as the default branch name for new repositories
 	defaultBranch = main
+[fetch]
+	# Automatically remove remote-tracking branches that no longer exist on the remote
+  	prune = true
+[branch]
+	# Sort branches by most recent commit date (descending order)
+    sort = -committerdate
+[log]
+	# Show abbreviated commit hashes instead of full 40-character hashes
+	abbrevCommit = true
+[commit]
+	# Show the diff being committed in the commit message editor for better context
+    verbose = true
+[pull]
+	# Pull from the current branch's upstream by default
+	default = current
+	# Use rebase instead of merge when pulling to maintain linear history
+    rebase = true
+[push]
+	# Automatically set upstream branch when pushing a new branch
+    autoSetupRemote = true
+	# Push to the current branch's upstream by default
+	default = current
+[rebase]
+	# Automatically stash uncommitted changes before rebasing and restore after
+    autoStash = true
+	# Show a warning if commits are missing during interactive rebase
+	missingCommitsCheck = warn
+[status]
+	# Always show the current branch name in git status output
+    branch = true
+	# Show information about stashed changes in git status
+	showStash = true
+	# Show all untracked files in git status (not just directories)
+	showUntrackedFiles = all
+[diff]
+	# Number of lines of context to show around changes
+	context = 3
+	# Detect file renames and copies in diffs
+	renames = copies
+	# Number of lines between diff hunks to show for better context
+	interHunkContext = 10
+[column]
+	# Automatically format command output in columns when appropriate
+    ui = auto
+[tag]
+	# Sort tags by version number in descending order
+    sort = -version:refname
 [interactive]
+	# Use delta for colorized diff output in interactive commands
   	diffFilter = delta --color-only --detect-dark-light always
+	# Allow single key press to select hunks in interactive mode
+	singleKey = true 
 [delta]
-  	navigate = true # use n and N to move between diff sections
+	# Enable navigation between diff sections using 'n' and 'N' keys
+  	navigate = true 
+	# Display diffs in side-by-side format for easier comparison
 	side-by-side = true
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
 [alias]
 	# Edit the git machete file
   	me = machete edit
-	# List the current branch structure
+	# List the current branch structure with commits
   	ms = machete status --list-commits
-	# Run machete traverse
+	# Run machete traverse for interactive branch management
   	mt = machete traverse
-	# Create a pull request
+	# Create a pull request using custom script
 	create-pr = !~/.dotfiles/scripts/ios-create-pr.sh
-	# Create a draft pull request
+	# Create a draft pull request using custom script
 	create-draft-pr = !~/.dotfiles/scripts/ios-create-draft-pr.sh
-# Override gitconfig for Depop repositories
-[includeIf "gitdir:~/Developer/Depop/**"]
-	path = ~/.dotfiles/.gitconfig_depop
+	# Show a graph of commit history with one commit per line
+	graph = log --all --graph --decorate --oneline
+	# Pretty print commit history with custom format including colors and metadata
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [mergetool]
+	# Don't keep backup files after successful merge resolution
 	keepBackup = false
+[rerere]
+	# Remember and reuse conflict resolutions automatically
+    enabled = true
+    # Automatically stage resolved conflicts
+    autoUpdate = true
+[filter "lfs"]
+	# Git LFS (Large File Storage) configuration for handling large files
+  	required = true
+  	clean = git-lfs clean -- %f
+  	smudge = git-lfs smudge -- %f
+  	process = git-lfs filter-process
+[maintenance]
+	# Enable automatic repository maintenance tasks for performance optimization
+    auto = true
+    # Use incremental maintenance strategy for better performance
+    strategy = incremental
+[help]
+	# Prompt before running autocorrected commands to prevent accidents
+    autocorrect = prompt
+
+# URL shortcuts for easier repository cloning
+[url "git@github.com:"]
+	# Use SSH for GitHub URLs (e.g., git clone gh:user/repo)
+    insteadOf = "gh:"
+[url "git@github.com:depop/"]
+	# Shortcut for Depop organization repositories (e.g., git clone depop:my-repo)
+    insteadOf = "depop:"
+
+# Conditional configuration includes
+[includeIf "gitdir:~/Developer/Depop/**"]
+	# Load Depop-specific git configuration for repositories in this directory
+	path = ~/.dotfiles/.gitconfig_depop

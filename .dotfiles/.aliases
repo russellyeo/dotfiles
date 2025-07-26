@@ -5,6 +5,19 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles_bare/ --work-tree=$HOME'
 alias bootstrap="sh ~/.dotfiles/bootstrap.sh"
 
 # git 
+alias gs="git status --short"
+alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n"'
+alias gc="git commit"
+alias gca='gc --amend --no-edit'
+alias gce='gc --amend'
+alias gi="git init"
+alias gcl="git clone"
+alias ga="git add"
+alias gap="git add --patch"
+alias gd="git diff"
+alias gr="git restore"
+alias gp="git push"
+alias gu="git pull"
 alias gm="git machete"
 
 # Shell configuration
