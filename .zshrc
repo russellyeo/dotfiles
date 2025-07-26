@@ -11,6 +11,9 @@ export PATH="$PATH:/Users/russellyeo/ACLI"
 export EDITOR="code --wait"
 export COLUMNS="120"
 
+# GPG
+export GPG_TTY=$(tty)
+
 # Load dotfiles
 source $HOME/.dotfiles/.aliases
 source $HOME/.dotfiles/.aliases-depop
