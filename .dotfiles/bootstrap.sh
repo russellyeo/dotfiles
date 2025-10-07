@@ -25,7 +25,6 @@ step "Bootstrapping"
 
 # Software updates
 step "Updating software"
-sudo softwareupdate -iaR --verbose
 xcode-select --install
 
 # zsh shell
@@ -55,7 +54,6 @@ brew update
 installing "brew taps"
 TAPS=(
     depop/tools
-    tmspzz/tap
     VirtusLab/git-machete
 )
 for TAP in ${TAPS[@]} 
@@ -78,25 +76,22 @@ BREWS=(
     ansible
     aria2
     bat
-    carthage
     depop/tools/depop-cli
-    diff-so-fancy
+    depop/tools/depop-ios-cli
     fd
     fzf
     gh
-    git
     git-machete
     htop
+    httpie
     jq
     mint
+    mise
     ncdu
-    nmap
-    pandoc
-    rust
-    swiftgen
-    swiftlint
-    tmspzz/homebrew-tap/rome
     tree
+    xcbeautify
+    xcode-build-server
+    xcodes
 )
 brew install ${BREWS[@]}
 
@@ -104,15 +99,10 @@ brew install ${BREWS[@]}
 installing "cask apps"
 CASKS=(
     bitwarden
-    dropbox
-    iterm2
     raycast
     proxyman
-    slack
-    spotify
     sublime-merge
-    visual-studio-code
-    vlc
+    sublime-text
 )
 brew install --cask ${CASKS[@]}
 
@@ -131,12 +121,8 @@ step "Creating files and directories"
 
 # Set macOS defaults
 step "Setting macOS defaults"
-
 ## Autohide dock
 defaults write com.apple.dock "autohide" -bool "true" && killall Dock
-
-## Set Xcode counterpart files (VIPER)
-defaults write com.apple.dt.Xcode "IDEAdditionalCounterpartSuffixes" -array-add "ViewController" "Interactor" "Presenter" "ViewModel" "Router" "Screen" && killall Xcode
 
 # Finish
 step "Bootstrapping complete"
