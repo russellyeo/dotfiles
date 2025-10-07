@@ -1,5 +1,6 @@
 # Environment
 export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="$PATH:$HOME/Library/Application\ Support/Coursier/bin"
 export PATH="$PATH:$HOME/.mint/bin"
