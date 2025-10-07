@@ -14,12 +14,12 @@
 	name = Russell Yeo
 	email = rusyeo@gmail.com
 	# Personal GPG signing key
-	signingkey = 2D18461D3EE4612F3845F4FD725DBC64DB716C14
-[gpg]
+	# signingkey = 2D18461D3EE4612F3845F4FD725DBC64DB716C14
+# [gpg]
 	# Specify GPG program location (Homebrew installation)
-	program = /opt/homebrew/bin/gpg
+	# program = /opt/homebrew/bin/gpg
 	# GPG key format (openpgp is default, but explicit is better)
-	format = openpgp
+	# format = openpgp
 [core]
 	# Use delta as the pager for better diff viewing
 	pager = delta
@@ -49,17 +49,17 @@
 	# Show abbreviated commit hashes instead of full 40-character hashes
 	abbrevCommit = true
 	# Show GPG signature information in log output
-	showSignature = true
+	# showSignature = true
 [commit]
 	# Show the diff being committed in the commit message editor for better context
     verbose = true
 	# Automatically sign all commits with GPG
-	gpgsign = true
+	# gpgsign = true
 [tag]
 	# Sort tags by version number in descending order
     sort = -version:refname
 	# Automatically sign all tags with GPG
-	gpgsign = true
+	# gpgsign = true
 [pull]
 	# Pull from the current branch's upstream by default
 	default = current

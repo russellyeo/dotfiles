@@ -4,7 +4,7 @@
 	name = Russell Yeo
 	email = russell@depop.com
 	# Depop GPG signing key for commits
-	signingkey = AD12AE3D1F1D221B778DFA07E1324E8DF05DBB4C
+	# signingkey = AD12AE3D1F1D221B778DFA07E1324E8DF05DBB4C
 [url "git@github.com:"]
 	# Force SSH for all GitHub URLs in Depop repositories
     insteadOf = "https://github.com/"
