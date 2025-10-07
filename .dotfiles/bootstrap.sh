@@ -47,21 +47,7 @@ else
     alreadyInstalled "homebrew"
 fi
 
-## Update homebrew
-brew update
-
-## Tap brew repositories
-installing "brew taps"
-TAPS=(
-    depop/tools
-    VirtusLab/git-machete
-)
-for TAP in ${TAPS[@]} 
-do
-    brew tap $TAP
-done
-
-## Update brew + upgrade brews/casks
+## Update brew + upgrade brew packages/casks
 updating "brew"
 brew update
 updating "brews"
@@ -69,15 +55,23 @@ brew upgrade
 updating "brew casks"
 brew upgrade --cask
 
+## Tap brew repositories
+installing "depop brew taps"
+TAPS=(
+    VirtusLab/git-machete
+)
+for TAP in ${TAPS[@]} 
+do
+    brew tap $TAP
+done
+
 ## Install command line tools
-installing "brews"
+installing "brew packages"
 BREWS=(
     ack
     ansible
     aria2
     bat
-    depop/tools/depop-cli
-    depop/tools/depop-ios-cli
     fd
     fzf
     gh
@@ -95,7 +89,7 @@ BREWS=(
 brew install ${BREWS[@]}
 
 ## Install graphical applications
-installing "cask apps"
+installing "brew cask packages"
 CASKS=(
     raycast
     proxyman
@@ -104,6 +98,16 @@ CASKS=(
     warp
 )
 brew install --cask ${CASKS[@]}
+
+## TODO: Requires GitHub token
+## Install Depop brew packages
+# installing "depop brew packages"
+# DEPOP_BREWS=(
+#     depop/tools/depop-cli
+#     depop/tools/depop-ios-cli
+# )
+# brew tap "depop/tools"
+# brew install ${DEPOP_BREWS[@]}
 
 ## Cleanup
 brew cleanup
