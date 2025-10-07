@@ -91,18 +91,17 @@ BREWS=(
     tree
     xcbeautify
     xcode-build-server
-    xcodes
 )
 brew install ${BREWS[@]}
 
 ## Install graphical applications
 installing "cask apps"
 CASKS=(
-    bitwarden
     raycast
     proxyman
     sublime-merge
     sublime-text
+    warp
 )
 brew install --cask ${CASKS[@]}
 
