@@ -19,6 +19,9 @@ function step() {
 function action() {
     echo "\033[32m==>\033[0m \033[1m$1\033[0m"
 }
+function error() {
+    echo "\033[31mError:\033[0m $1"
+}
 
 # Begin
 step "Bootstrapping"
@@ -119,6 +122,52 @@ MINTS=(
     RobotsAndPencils/xcodes
 )
 mint install ${MINTS[@]}
+
+# Node.js via nvm
+step "Installing Node.js via nvm"
+
+## Check if nvm is already installed
+export NVM_VERSION="v0.40.3"
+if [ ! -d "$HOME/.nvm" ]; then
+    installing "nvm"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh | bash
+    # Source nvm for the current session
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+else
+    alreadyInstalled "nvm"
+    # Source nvm for the current session
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
+
+## Install latest LTS Node.js (includes npm)
+if command -v nvm >/dev/null 2>&1; then
+    installing "Node.js LTS (includes npm)"
+    nvm install --lts
+    nvm use --lts
+    nvm alias default lts/*
+    # Verify installation
+    action "Node.js version: $(node --version)"
+    action "npm version: $(npm --version)"
+else
+    error "nvm not found in PATH. Please restart your terminal and run the script again."
+fi
+
+## Install Claude Code CLI
+if command -v npm >/dev/null 2>&1; then
+    installing "Claude Code CLI"
+    npm install -g @anthropic-ai/claude-code
+    # Verify installation
+    if command -v claude-code >/dev/null 2>&1; then
+        action "Claude Code CLI installed successfully"
+    else
+        echo "\033[33mWarning:\033[0m Claude Code CLI may not be in PATH. You may need to restart your terminal."
+    fi
+else
+    error "npm not found. Cannot install Claude Code CLI."
+fi
 
 # Create files and directories
 step "Creating files and directories"
