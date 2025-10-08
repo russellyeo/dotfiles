@@ -72,6 +72,7 @@ BREWS=(
     ansible
     aria2
     bat
+    delta
     fd
     fzf
     gh
@@ -95,6 +96,7 @@ CASKS=(
     proxyman
     sublime-merge
     sublime-text
+    visual-studio-code
     warp
 )
 brew install --cask ${CASKS[@]}
