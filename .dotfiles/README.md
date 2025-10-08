@@ -20,6 +20,8 @@ Copy public key to clipboard, then paste into [GitHub SSH keys](https://github.c
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
+Select `Configure SSO` if work organisation has enforced SAML SSO to authorize the key to be used with projects in the organisation.
+
 ## Save ssh key password to keychain
 
 Start the ssh-agent in the background.
@@ -27,7 +29,7 @@ Start the ssh-agent in the background.
 eval "$(ssh-agent -s)"
 ```
 
-Modify ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in the keychain.
+Modify `~/.ssh/config` file to automatically load keys into the ssh-agent and store passphrases in the keychain.
 ```sh
 Host *
   AddKeysToAgent yes
