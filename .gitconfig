@@ -12,7 +12,7 @@
 [user]
 	# User identity for commits
 	name = Russell Yeo
-	email = rusyeo@gmail.com
+	email = russell@depop.com
 	# Personal GPG signing key
 	# signingkey = 2D18461D3EE4612F3845F4FD725DBC64DB716C14
 # [gpg]
@@ -89,9 +89,9 @@
 	renames = copies
 	# Number of lines between diff hunks to show for better context
 	interHunkContext = 10
-[column]
+# [column]
 	# Automatically format command output in columns when appropriate
-    ui = auto
+    # ui = auto
 [interactive]
 	# Use delta for colorized diff output in interactive commands
   	diffFilter = delta --color-only --detect-dark-light always
@@ -120,6 +120,9 @@
 [mergetool]
 	# Don't keep backup files after successful merge resolution
 	keepBackup = false
+[mergetool "sublimerge"]
+	cmd = subl -n --wait \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\" --command \"sublimerge_diff_views\"
+	trustExitCode = false
 [rerere]
 	# Remember and reuse conflict resolutions automatically
     enabled = true

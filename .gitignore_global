@@ -2,12 +2,16 @@
 .DS_Store
 
 # LLM context files
-FEATURE.md
-CONTEXT.md
-PROJECT_STRUCTURE.md
-CONVENTIONS.md
-API_CONTEXT.md
-DEPENDENCIES.md
-GLOSSARY.md
-ARCHITECTURE.md
-TESTING_STRATEGY.md
+AGENTS.md
+CLAUDE.md
+.claude/
+
+# SpecKit
+.specify/
+specs/
+
+# Git worktrees
+.worktrees/
+
+# Superpowers
+docs/

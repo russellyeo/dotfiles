@@ -83,6 +83,7 @@ BREWS=(
     htop
     httpie
     jq
+    llm
     mint
     mise
     ncdu
@@ -104,15 +105,19 @@ CASKS=(
 )
 brew install --cask ${CASKS[@]}
 
-## TODO: Requires GitHub token
+## Add Depop tools homebrew tap
+installing "depop brew tap"
+gh auth login
+export HOMEBREW_GITHUB_API_TOKEN=$(gh auth token)
+brew tap depop/tools git@github.com:depop/homebrew-tools.git
+
 ## Install Depop brew packages
-# installing "depop brew packages"
-# DEPOP_BREWS=(
-#     depop/tools/depop-cli
-#     depop/tools/depop-ios-cli
-# )
-# brew tap "depop/tools"
-# brew install ${DEPOP_BREWS[@]}
+installing "depop brew packages"
+DEPOP_BREWS=(
+    depop/tools/depop-cli
+    depop/tools/depop-ios-cli
+)
+brew install ${DEPOP_BREWS[@]}
 
 ## Cleanup
 brew cleanup

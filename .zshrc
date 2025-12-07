@@ -51,3 +51,6 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home
 
 # Mise
 eval "$(mise activate zsh)"
+
+# ntfy.sh
+export NTFY_TOPIC="russell-yeo-claude-topic-64"

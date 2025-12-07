@@ -90,9 +90,8 @@ generate_title_file() {
 # Generate description file based on git diff
 generate_pr_description_file() {
     echo "Prefilling description file based on git diff..."
-    # Generate description with git diff and write to .git/info/description
-    # _generate_pr_description > .git/info/description
-    "" > .git/info/description # Empty file for now.
+    # Prefill description from template
+    cp .git/info/description_template.md .git/info/description
 }
 
 # Prompt user to edit title and description files if needed
